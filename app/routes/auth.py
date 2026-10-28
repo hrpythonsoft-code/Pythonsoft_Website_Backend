@@ -79,6 +79,7 @@ async def admin_login(
         secure=settings.COOKIE_SECURE,
         samesite=settings.COOKIE_SAMESITE,
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        path="/"
     )
 
     return {
@@ -105,6 +106,10 @@ async def admin_logout(
 ):
     response.delete_cookie(
         key="access_token",
+        path="/",
+        secure=settings.COOKIE_SECURE,
+        httponly=True,
+        samesite=settings.COOKIE_SAMESITE,
     )
 
     return {
